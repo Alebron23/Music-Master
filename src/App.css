@@ -1,0 +1,114 @@
+
+body {
+	background: #000;
+	color: #fff;
+}
+
+.App {
+	text-align: center;
+	padding: 5%;
+}
+
+/*Profile*/
+/*flex allows things to expand in relation to each other so they 
+stay relative to eachother. */
+
+.profile {
+	display: flex;
+	justify-content: center;
+}
+
+.profile-info {
+	margin-left: 10px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.profile-img {
+	width: 150px;
+	height: 150px;
+	border: 3px solid #fff;
+	border-radius: 75px;
+	object-fit: cover;
+}
+
+.profile-name {
+	font-size: 26px;
+}
+
+.profile-followers , .padding-genres: {
+	font-size: 18px;
+}
+
+/*Gallery*/
+/*Styling for the track */
+.track {
+	display: inline-block;
+	width: 220px;
+	height: 220px;
+	margin: 10px;
+	text-align: left;
+	cursor: pointer;
+	position: relative;
+}
+/*make relative so they align side to side.*/
+
+.track-img{
+	width: 220px;
+	height: 220px;
+	border: 3px solid #fff;
+	border-radius: 3px;
+	object-fit: cover;
+	position: absolute;
+
+}
+
+.track-text {
+	background-color: black;
+	color: white; 
+	opacity: .75;
+	width: 220px;
+	margin-left: 3px;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+}
+
+.track-play {
+	position: absolute;
+	width: 220px;
+	height: 220px;
+}
+
+.track-play-inner {
+	position: absolute;
+	text-align: center;
+	font-size: 25px;
+	background-color: black;
+	border-radius: 30px;
+	width: 60px;
+	height: 60px;
+	color: white;
+	padding-top: 13px;
+	margin-left: 80px;
+	margin-top: 80px;
+	opacity: 0;
+}
+
+.track-play-inner:hover{
+	opacity: 0.8;
+	animation-name: fade-in;
+	animation-duration: 0.5s;
+}
+
+/*adds animation to the play button*/
+@keyframes fade-in {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity: 0.8;
+	}
+}
