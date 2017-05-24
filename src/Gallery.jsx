@@ -6,7 +6,9 @@ class Gallery extends Component {
 	//need a constructor becuase you need a state 
 	//for the playing music.
 	constructor(props) {
+
 		super(props);
+
 		this.state = {
 			playingUrl: '',
 			audio: null,
@@ -50,44 +52,43 @@ class Gallery extends Component {
 		//console.log('Gallery props', this.props.gallery);
 		const tracks = this.props.tracks;
 
-		return (
-			<div> 	
-				{tracks.map((track, k) => {
+		if(tracks !== null){
+            return (
+				<div>
+                    {
+                        tracks.map((track, k) => {
 
-					console.log('track', track);
-					const trackImg = track.album.images[0].url;
-					
-					return (
-						
-						<div key={k} className="track"
-						onClick={() => this.playAudio(track.preview_url)}> 
-							<img 
-							src={trackImg}
-							className="track-img" 
-							alt="track"/>
+                            console.log('track', track);
+                            const trackImg = track.album.images[0].url;
 
-							<div className="track-play">
-								<div className="track-play-inner">
-									
-									{
-										this.state.playingUrl === track.preview_url 
-											? <span>| |</span>
-											: <span>&#9654;</span>
-									}
+                            return (
+
+								<div key={k} className="track" onClick={() => this.playAudio(track.preview_url)}>
+									<img src={trackImg} className="track-img" alt="track"/>
+
+									<div className="track-play">
+										<div className="track-play-inner">
+
+                                            {
+                                                this.state.playingUrl === track.preview_url
+                                                    ? <span>| |</span>
+                                                    : <span>&#9654;</span>
+                                            }
+										</div>
+									</div>
+
+									<p className="track-text">
+                                        {track.name}
+									</p>
 								</div>
-							</div>
-
-							<p className="track-text">
-								{track.name}
-							</p>
-						</div>
-						
-							
-						
-					)
-				})}
-			</div>
-		)
+                            )
+                        })
+                    }
+				</div>
+            )
+		} else {
+			return null;
+		}
 	}
 }
 
