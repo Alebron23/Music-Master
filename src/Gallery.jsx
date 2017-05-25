@@ -3,13 +3,12 @@ import './App.css';
 
 class Gallery extends Component {
 
-	//need a constructor becuase you need a state 
-	//for the playing music.
-	constructor(props) {
+	constructor(props) {		//need a constructor becuase you need a state for the playing music.
 
 		super(props);
 
 		this.state = {
+
 			playingUrl: '',
 			audio: null,
 			playing: false
@@ -17,29 +16,37 @@ class Gallery extends Component {
 	}
 
 	playAudio(previewUrl) {
+
 		let audio = new Audio(previewUrl);
 		
 		if(!this.state.playing) {
 
 			audio.play();
+
 			this.setState({
-				playing: true,
-				playingUrl: previewUrl,
+
+				playing		: true,
+				playingUrl	: previewUrl,
 				audio
 			})
 		} else {
+
 			if(this.state.playingUrl === previewUrl){
 
 				this.state.audio.pause();
+
 				this.setState({
 					playing: false
 				})
 			} else {
+
 				this.state.audio.pause();
+
 				audio.play();
+
 				this.setState({
-					playing: true,
-					playingUrl: previewUrl,
+					playing		: true,
+					playingUrl	: previewUrl,
 					audio
 
 				})
@@ -49,16 +56,14 @@ class Gallery extends Component {
 
 	render() {
 
-		//console.log('Gallery props', this.props.gallery);
 		const tracks = this.props.tracks;
 
-		if(tracks !== null){
+		if(tracks !== null){	//If search did not come back empty then display the tracks.
             return (
 				<div>
                     {
                         tracks.map((track, k) => {
 
-                            console.log('track', track);
                             const trackImg = track.album.images[0].url;
 
                             return (
@@ -87,7 +92,7 @@ class Gallery extends Component {
 				</div>
             )
 		} else {
-			return null;
+			return null;	//The render function has to return something, so if the search came back empty then return null.
 		}
 	}
 }
