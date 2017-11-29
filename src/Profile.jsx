@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 
+/**
+ * Display the artist picture with genre details 
+ * @class
+ */
 class Profile extends Component {
+
+	/**
+	 * @function
+	 * @return {reactElement}
+	 */
 	render() {
 		
+		/** Object to hold artist info template. Gets set to artist object received from spotify */
 		let artist = {name:'', followers: {total: ''}, images: [{url: ''}], genres: []};
 
 		artist = this.props.artist != null ? this.props.artist : artist;		//ternary expression
 		
+		/** Return artist picture and profile information. */
 		return (
 			<div className="profile"> 
 
@@ -38,7 +49,7 @@ class Profile extends Component {
 						}
 					</div>
 				</div>
-			</div>	//you have to map over the genres javascript has a map function for arrays that allows you to map over them. the map function has to return the jsx just like the render function does. Each span tag has to have a certain key property on it.
+			</div>
 		)
 	}
 }
