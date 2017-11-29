@@ -6,8 +6,8 @@ class Profile extends Component {
 		
 		let artist = {name:'', followers: {total: ''}, images: [{url: ''}], genres: []};
 
-		artist = this.props.artist != null ? this.props.artist: artist;		//ternary expression
-
+		artist = this.props.artist != null ? this.props.artist : artist;		//ternary expression
+		
 		return (
 			<div className="profile"> 
 

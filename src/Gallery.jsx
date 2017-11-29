@@ -9,9 +9,9 @@ class Gallery extends Component {
 
 		this.state = {
 
-			playingUrl: '',
-			audio: null,
-			playing: false
+			playingUrl	: '',
+			audio		: null,
+			playing		: false
 		}
 	}
 
@@ -20,11 +20,9 @@ class Gallery extends Component {
 		let audio = new Audio(previewUrl);
 		
 		if(!this.state.playing) {
-
 			audio.play();
 
 			this.setState({
-
 				playing		: true,
 				playingUrl	: previewUrl,
 				audio
@@ -32,24 +30,22 @@ class Gallery extends Component {
 		} else {
 
 			if(this.state.playingUrl === previewUrl){
-
 				this.state.audio.pause();
 
 				this.setState({
 					playing: false
 				})
 			} else {
-
 				this.state.audio.pause();
 
 				audio.play();
 
 				this.setState({
+
 					playing		: true,
 					playingUrl	: previewUrl,
 					audio
-
-				})
+				});
 			}
 		}
 	}
@@ -57,8 +53,10 @@ class Gallery extends Component {
 	render() {
 
 		const tracks = this.props.tracks;
+		let nonPlayableTracks = 0;
 
-		if(tracks !== null){	//If search did not come back empty then display the tracks.
+		/** If search did not come back empty then display the tracks.*/
+		if(tracks !== null){	
             return (
 				<div>
                     {
@@ -66,33 +64,41 @@ class Gallery extends Component {
 
                             const trackImg = track.album.images[0].url;
 
-                            return (
+							if(track.preview_url !== null){
+								return (
+									<div key={k} className="track" onClick={() => this.playAudio(track.preview_url)}>
+										<img src={trackImg} className="track-img" alt="track"/>
 
-								<div key={k} className="track" onClick={() => this.playAudio(track.preview_url)}>
-									<img src={trackImg} className="track-img" alt="track"/>
+										<div className="track-play">
+											<div className="track-play-inner">
 
-									<div className="track-play">
-										<div className="track-play-inner">
-
-                                            {
-                                                this.state.playingUrl === track.preview_url
-                                                    ? <span>| |</span>
-                                                    : <span>&#9654;</span>
-                                            }
+												{
+													this.state.playingUrl === track.preview_url
+														? <span>| |</span>
+														: <span>&#9654;</span>
+												}
+											</div>
 										</div>
-									</div>
 
-									<p className="track-text">
-                                        {track.name}
-									</p>
-								</div>
-                            )
+										<p className="track-text">
+											{track.name}
+										</p>
+									</div>
+                            	)
+							}else {
+								nonPlayableTracks++;
+								if(nonPlayableTracks === 10){
+									return 'No tracks to play.'
+								} else {
+									return '';
+								}			
+							}
                         })
                     }
 				</div>
             )
 		} else {
-			return null;	//The render function has to return something, so if the search came back empty then return null.
+			return (<div></div>);	//The render function has to return something, so if the search came back empty then return null.
 		}
 	}
 }
